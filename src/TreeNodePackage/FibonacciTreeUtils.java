@@ -9,21 +9,27 @@ public class FibonacciTreeUtils {
         TreeNode treeNodeArg = generateArg(number);
         TreeNode treeNodeRes = generateRes(number);
         TreeNode treeNodeNum = generateNum(number, 0).result;
+        TreeNode treeNodeNum1 = generateNum(number);
 
         System.out.println(treeNodeArg.left.left.right.value);
         System.out.println(treeNodeRes.left.right.value);
-        System.out.println(treeNodeNum.left.left.left.value);
+        System.out.println(treeNodeNum.left.left.value);
+        System.out.println(treeNodeNum1.left.left.value);
     }
 
-    private static ReturnTreeNode generateNum(int number, int count) {
+    private static TreeNode generateNum(int number) {
+        return generateNum(number, 0).result;
+    }
+
+    private static TreeNodeAndCount generateNum(int number, int count) {
         if (number > 1) {
             TreeNode result = new TreeNode(count,
                     generateNum(number - 2, count + 1).result,
                     generateNum(number - 1, generateNum(number - 2, count + 1).count + 1).result);
-            return new ReturnTreeNode(result, count);
+            return new TreeNodeAndCount(result, count);
         } else {
             TreeNode result = new TreeNode(count, null, null);
-            return new ReturnTreeNode(result, count);
+            return new TreeNodeAndCount(result, count);
         }
     }
 
